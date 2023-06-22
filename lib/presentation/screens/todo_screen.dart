@@ -22,20 +22,35 @@ class TodoScreen extends StatelessWidget {
         title: const Text('Todo App'),
         backgroundColor: Colors.grey[400],
       ),
-      body: const _TodoView(),
+      body: _TodoView(),
     );
   }
 }
 
-class _TodoView extends StatelessWidget {
-  const _TodoView({
-    super.key,
-  });
+class _TodoView extends StatefulWidget {
 
+
+  @override
+  State<_TodoView> createState() => _TodoViewState();
+}
+
+class _TodoViewState extends State<_TodoView> {
   @override
   Widget build(BuildContext context) {
 
     final todoProvider = context.watch<TodoProvider>();
+    final textController = TextEditingController();
+
+    bool isEditing = false;
+    String todoToModify = '';
+
+    void _sendEdit(String text) {
+      
+      isEditing = true;
+      todoToModify = text;
+      textController.text = todoToModify;
+
+    }
 
     return SafeArea(
       child: Padding(
@@ -60,16 +75,28 @@ class _TodoView extends StatelessWidget {
                       );
                     },
                     completed: newTodo.completed,
+                    onEdit: (value) {
+                      _sendEdit(value);
+                    },
                   );
                 },
               ),
             ),
             MessageFieldBox(
               onValue: (value) {
-                todoProvider.sendTodo(
-                  value
-                );
+                if ( !isEditing ) {
+                  todoProvider.sendTodo(
+                    value
+                  );
+                } else {
+                  todoProvider.editTodo(
+                    todoToModify,
+                    value
+                  );
+                }
               },
+              isEditing: isEditing,
+              textController: textController,
             ),
             const SizedBox(
               height: 10,

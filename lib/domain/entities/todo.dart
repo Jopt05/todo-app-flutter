@@ -2,7 +2,7 @@
 class TodoPost {
 
   bool completed;
-  final String todo;
+  String todo;
 
   TodoPost({
     required this.todo,

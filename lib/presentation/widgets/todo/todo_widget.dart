@@ -6,14 +6,17 @@ class TodoWidget extends StatelessWidget {
   final String todo;
   final ValueChanged<String> onDelete;
   final ValueChanged<String> onCompleted;
+  final ValueChanged<String> onEdit;
   bool completed;
+
 
   TodoWidget({
     super.key,
     required this.todo,
     this.completed = false,
     required this.onDelete,
-    required this.onCompleted
+    required this.onCompleted,
+    required this.onEdit
   });
 
   @override
@@ -34,11 +37,16 @@ class TodoWidget extends StatelessWidget {
                 onCompleted(todo);
               },
             ),
-            Text(
-              todo,
-              style: TextStyle(
-                fontSize: 20.0,
-                decoration: completed ? TextDecoration.lineThrough : TextDecoration.none
+            GestureDetector(
+              onDoubleTap: () {
+                onEdit(todo);
+              },
+              child: Text(
+                todo,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  decoration: completed ? TextDecoration.lineThrough : TextDecoration.none
+                ),
               ),
             ),
             IconButton(

@@ -37,18 +37,31 @@ class TodoProvider extends ChangeNotifier {
 
   void completeTodo( String text ) {
 
-    Iterable<TodoPost> newTodo = todos.where((element) => element.todo == text);
-    print(newTodo.first);
-    newTodo = newTodo.toList();
-    TodoPost todo = newTodo.first;
-    print(todo.todo);
-    print(todo.completed);
+    TodoPost todo = _findTodo(text);
 
     todo.completed = !todo.completed;
 
-    print(todo.completed);
+    notifyListeners();
+
+  }
+
+  void editTodo( String text, String newText ) {
+
+    TodoPost todo = _findTodo(text);
+
+    todo.todo = newText;
 
     notifyListeners();
+
+  }
+
+  TodoPost _findTodo( String text ) {
+
+    Iterable<TodoPost> newTodo = todos.where((element) => element.todo == text);
+    newTodo = newTodo.toList();
+    TodoPost todo = newTodo.first;
+
+    return todo;
 
   }
 
