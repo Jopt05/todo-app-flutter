@@ -41,11 +41,15 @@ class TodoWidget extends StatelessWidget {
               onDoubleTap: () {
                 onEdit(todo);
               },
-              child: Text(
-                todo,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  decoration: completed ? TextDecoration.lineThrough : TextDecoration.none
+              child: Container(
+                width: 300,
+                child: Text(
+                  todo,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    decoration: completed ? TextDecoration.lineThrough : TextDecoration.none,
+                    
+                  ),
                 ),
               ),
             ),
