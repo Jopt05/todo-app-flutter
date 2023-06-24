@@ -1,4 +1,5 @@
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class TodoWidget extends StatelessWidget {
@@ -21,46 +22,52 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0.5,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 10
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Checkbox(
-              value: completed,
-              onChanged: (value) {
-                onCompleted(todo);
-              },
-            ),
-            GestureDetector(
-              onDoubleTap: () {
-                onEdit(todo);
-              },
-              child: Container(
-                width: 300,
+    return FadeIn(
+      duration: const Duration(seconds: 1),
+      child: Card(
+        elevation: 0.8,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Checkbox(
+                    value: completed,
+                    onChanged: (value) {
+                      onCompleted(todo);
+                    },
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      onDelete(todo);
+                    }, 
+                    icon: const Icon( Icons.delete ),
+                    color: Colors.red,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onDoubleTap: () {
+                  onEdit(todo);
+                },
                 child: Text(
                   todo,
                   style: TextStyle(
                     fontSize: 20.0,
                     decoration: completed ? TextDecoration.lineThrough : TextDecoration.none,
-                    
                   ),
                 ),
               ),
-            ),
-            IconButton(
-              onPressed: () {
-                onDelete(todo);
-              }, 
-              icon: const Icon( Icons.delete ),
-              color: Colors.red,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -12,6 +12,8 @@ class TodoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -20,7 +22,7 @@ class TodoScreen extends StatelessWidget {
           child: Icon( Icons.menu ),
         ),
         title: const Text('Todo App'),
-        backgroundColor: Colors.grey[400],
+        backgroundColor: colors.background,
       ),
       body: _TodoView(),
     );

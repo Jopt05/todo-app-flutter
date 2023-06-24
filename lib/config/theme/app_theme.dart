@@ -6,7 +6,7 @@ const Color _customColor = Color(
 );
 
 const List<Color> _colorThemes = [
-  _customColor,
+  Colors.deepPurple,
   Colors.blue,
   Colors.teal,
   Colors.green,
