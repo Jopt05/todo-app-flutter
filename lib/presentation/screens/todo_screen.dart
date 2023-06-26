@@ -55,55 +55,60 @@ class _TodoViewState extends State<_TodoView> {
     }
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: todoProvider.todos.length,
-                itemBuilder: (context, index) {
-                  final newTodo = todoProvider.todos[index];
-                  return TodoWidget(
-                    todo: newTodo.todo,
-                    onDelete: (value) {
-                      todoProvider.deleteTodo(
-                        value
-                      );
-                    },
-                    onCompleted: (value) {
-                      todoProvider.completeTodo(
-                        value
-                      );
-                    },
-                    completed: newTodo.completed,
-                    onEdit: (value) {
-                      _sendEdit(value);
-                    },
-                  );
-                },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[200]
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: todoProvider.todos.length,
+                  itemBuilder: (context, index) {
+                    final newTodo = todoProvider.todos[index];
+                    return TodoWidget(
+                      todo: newTodo.todo,
+                      onDelete: (value) {
+                        todoProvider.deleteTodo(
+                          value
+                        );
+                      },
+                      onCompleted: (value) {
+                        todoProvider.completeTodo(
+                          value
+                        );
+                      },
+                      completed: newTodo.completed,
+                      onEdit: (value) {
+                        _sendEdit(value);
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
-            MessageFieldBox(
-              onValue: (value) {
-                if ( !isEditing ) {
-                  todoProvider.sendTodo(
-                    value
-                  );
-                } else {
-                  todoProvider.editTodo(
-                    todoToModify,
-                    value
-                  );
-                }
-              },
-              isEditing: isEditing,
-              textController: textController,
-            ),
-            const SizedBox(
-              height: 10,
-            )
-          ],
+              MessageFieldBox(
+                onValue: (value) {
+                  if ( !isEditing ) {
+                    todoProvider.sendTodo(
+                      value
+                    );
+                  } else {
+                    todoProvider.editTodo(
+                      todoToModify,
+                      value
+                    );
+                  }
+                },
+                isEditing: isEditing,
+                textController: textController,
+              ),
+              const SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
     );

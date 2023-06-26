@@ -25,7 +25,7 @@ class TodoWidget extends StatelessWidget {
     return FadeIn(
       duration: const Duration(seconds: 1),
       child: Card(
-        elevation: 0.8,
+        elevation: 0.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -42,12 +42,11 @@ class TodoWidget extends StatelessWidget {
                     },
                   ),
                   const Spacer(),
-                  IconButton(
+                  FilledButton(
                     onPressed: () {
                       onDelete(todo);
                     }, 
-                    icon: const Icon( Icons.delete ),
-                    color: Colors.red,
+                    child: const Icon( Icons.delete ),
                   ),
                 ],
               ),
