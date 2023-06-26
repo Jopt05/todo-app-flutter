@@ -31,27 +31,14 @@ class TodoWidget extends StatelessWidget {
             horizontal: 20,
             vertical: 10
           ),
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Checkbox(
-                    value: completed,
-                    onChanged: (value) {
-                      onCompleted(todo);
-                    },
-                  ),
-                  const Spacer(),
-                  FilledButton(
-                    onPressed: () {
-                      onDelete(todo);
-                    }, 
-                    child: const Icon( Icons.delete ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
+              Checkbox(
+                value: completed,
+                onChanged: (value) {
+                  onCompleted(todo);
+                },
               ),
               GestureDetector(
                 onDoubleTap: () {
@@ -64,6 +51,12 @@ class TodoWidget extends StatelessWidget {
                     decoration: completed ? TextDecoration.lineThrough : TextDecoration.none,
                   ),
                 ),
+              ),
+              FilledButton(
+                onPressed: () {
+                  onDelete(todo);
+                }, 
+                child: const Icon( Icons.delete ),
               ),
             ],
           ),

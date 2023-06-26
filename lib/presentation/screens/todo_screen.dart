@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/presentation/widgets/shared/message_field_box.dart';
 import 'package:flutter_todo_app/presentation/widgets/todo/todo_widget.dart';
@@ -42,6 +41,7 @@ class _TodoViewState extends State<_TodoView> {
 
     final todoProvider = context.watch<TodoProvider>();
     final textController = TextEditingController();
+    final searchController = TextEditingController();
 
     bool isEditing = false;
     String todoToModify = '';
@@ -63,6 +63,26 @@ class _TodoViewState extends State<_TodoView> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
+              const SizedBox(
+                height: 30,
+              ),
+
+              const SizedBox(
+                height: 50,
+              ),
+
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'All ToDos',
+                    style: TextStyle(
+                      fontSize: 30
+                    ),
+                  ),
+                ],
+              ),
+
               Expanded(
                 child: ListView.builder(
                   itemCount: todoProvider.todos.length,
