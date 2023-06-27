@@ -65,15 +65,4 @@ class TodoProvider extends ChangeNotifier {
 
   }
 
-  // void moveScrollToBottom() {
-
-  //   chatScrollController.animateTo(
-  //     // Ve hasta el máximo que puedas 
-  //     chatScrollController.position.maxScrollExtent, 
-  //     duration: const Duration( milliseconds: 300 ), 
-  //     curve: Curves.easeOut
-  //   );
-
-  // }
-
 }

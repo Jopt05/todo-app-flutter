@@ -49,6 +49,7 @@ class MessageFieldBox extends StatelessWidget {
       decoration: inputDecoration,
       onFieldSubmitted: (value) {
         textController.clear();
+        focusNode.requestFocus();
         onValue(value);
       },
     );

@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 class SearchFieldBox extends StatelessWidget {
 
   final ValueChanged<String> onValue;
+  final String currentFilter;
 
   SearchFieldBox({
     super.key,
-    required this.onValue
+    required this.onValue,
+    required this.currentFilter
   });
+
+  final textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-    final FocusNode focusNode = FocusNode();
-    final textController = TextEditingController();
+    textController.text = currentFilter != "" ? currentFilter : "";
 
     final outlineInputBorder = UnderlineInputBorder(
       borderSide: const BorderSide(
@@ -33,10 +35,6 @@ class SearchFieldBox extends StatelessWidget {
       );
 
     return TextFormField(
-      onTapOutside: (event) {
-        focusNode.unfocus();
-      },
-      focusNode: focusNode,
       controller: textController,
       decoration: inputDecoration,
       onFieldSubmitted: (value) {
