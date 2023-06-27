@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/presentation/widgets/shared/message_field_box.dart';
+import 'package:flutter_todo_app/presentation/widgets/shared/search_field_box.dart';
 import 'package:flutter_todo_app/presentation/widgets/todo/todo_widget.dart';
 import 'package:flutter_todo_app/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
@@ -41,18 +42,10 @@ class _TodoViewState extends State<_TodoView> {
 
     final todoProvider = context.watch<TodoProvider>();
     final textController = TextEditingController();
-    final searchController = TextEditingController();
 
     bool isEditing = false;
     String todoToModify = '';
-
-    void _sendEdit(String text) {
-      
-      isEditing = true;
-      todoToModify = text;
-      textController.text = todoToModify;
-
-    }
+    String actualSearch = '';
 
     return SafeArea(
       child: Container(
@@ -65,6 +58,12 @@ class _TodoViewState extends State<_TodoView> {
             children: [
               const SizedBox(
                 height: 30,
+              ),
+
+              SearchFieldBox(
+                onValue: (value) {
+                  actualSearch = value;
+                },
               ),
 
               const SizedBox(
@@ -102,7 +101,9 @@ class _TodoViewState extends State<_TodoView> {
                       },
                       completed: newTodo.completed,
                       onEdit: (value) {
-                        _sendEdit(value);
+                        isEditing = true;
+                        todoToModify = value;
+                        textController.text = value;
                       },
                     );
                   },
