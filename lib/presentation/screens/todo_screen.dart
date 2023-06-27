@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/domain/entities/todo.dart';
 import 'package:flutter_todo_app/presentation/widgets/shared/message_field_box.dart';
 import 'package:flutter_todo_app/presentation/widgets/shared/search_field_box.dart';
 import 'package:flutter_todo_app/presentation/widgets/todo/todo_widget.dart';
@@ -37,15 +38,17 @@ class _TodoView extends StatefulWidget {
 }
 
 class _TodoViewState extends State<_TodoView> {
+
+  final textController = TextEditingController();
+
+  bool isEditing = false;
+  String todoToModify = "";
+  String actualSearch = "";
+
   @override
   Widget build(BuildContext context) {
 
     final todoProvider = context.watch<TodoProvider>();
-    final textController = TextEditingController();
-
-    bool isEditing = false;
-    String todoToModify = '';
-    String actualSearch = '';
 
     return SafeArea(
       child: Container(
@@ -62,7 +65,9 @@ class _TodoViewState extends State<_TodoView> {
 
               SearchFieldBox(
                 onValue: (value) {
-                  actualSearch = value;
+                  setState(() {
+                    actualSearch = value;
+                  });
                 },
               ),
 
@@ -87,25 +92,77 @@ class _TodoViewState extends State<_TodoView> {
                   itemCount: todoProvider.todos.length,
                   itemBuilder: (context, index) {
                     final newTodo = todoProvider.todos[index];
-                    return TodoWidget(
-                      todo: newTodo.todo,
-                      onDelete: (value) {
-                        todoProvider.deleteTodo(
-                          value
-                        );
-                      },
-                      onCompleted: (value) {
-                        todoProvider.completeTodo(
-                          value
-                        );
-                      },
-                      completed: newTodo.completed,
-                      onEdit: (value) {
-                        isEditing = true;
-                        todoToModify = value;
-                        textController.text = value;
-                      },
-                    );
+                    if( actualSearch.isEmpty ) {
+                      return TodoWidget(
+                        todo: newTodo.todo,
+                        onDelete: (value) {
+                          todoProvider.deleteTodo(
+                            value
+                          );
+                        },
+                        onCompleted: (value) {
+                          todoProvider.completeTodo(
+                            value
+                          );
+                        },
+                        completed: newTodo.completed,
+                        onEdit: (value) {
+                          setState(() {
+                            isEditing = true;
+                            todoToModify = value;
+                          });
+                          textController.text = value;
+                        },
+                      );
+                    }
+
+                    if( actualSearch.isNotEmpty && newTodo.todo.toLowerCase().contains(actualSearch.toLowerCase()) ) {
+                      return TodoWidget(
+                        todo: newTodo.todo,
+                        onDelete: (value) {
+                          todoProvider.deleteTodo(
+                            value
+                          );
+                        },
+                        onCompleted: (value) {
+                          todoProvider.completeTodo(
+                            value
+                          );
+                        },
+                        completed: newTodo.completed,
+                        onEdit: (value) {
+                          setState(() {
+                            isEditing = true;
+                            todoToModify = value;
+                          });
+                          textController.text = value;
+                        },
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                    
+                    // return TodoWidget(
+                    //   todo: newTodo.todo,
+                    //   onDelete: (value) {
+                    //     todoProvider.deleteTodo(
+                    //       value
+                    //     );
+                    //   },
+                    //   onCompleted: (value) {
+                    //     todoProvider.completeTodo(
+                    //       value
+                    //     );
+                    //   },
+                    //   completed: newTodo.completed,
+                    //   onEdit: (value) {
+                    //     setState(() {
+                    //       isEditing = true;
+                    //       todoToModify = value;
+                    //     });
+                    //     textController.text = value;
+                    //   },
+                    // );
                   },
                 ),
               ),

@@ -39,7 +39,7 @@ class SearchFieldBox extends StatelessWidget {
       focusNode: focusNode,
       controller: textController,
       decoration: inputDecoration,
-      onChanged: (value) {
+      onFieldSubmitted: (value) {
         final newValue = textController.value.text;
         onValue(newValue);
       },
