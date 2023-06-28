@@ -6,8 +6,6 @@ class TodoProvider extends ChangeNotifier {
 
   List<TodoPost> todos = [];
 
-  // final ScrollController chatScrollController = ScrollController();
-
   void sendTodo( String text ) {
 
       if ( text.isEmpty ) return;
@@ -20,10 +18,7 @@ class TodoProvider extends ChangeNotifier {
       todos.add(
         newMessage
       );
-
-      // Actualiza el provider, notifica a todos los eque escuchen
       notifyListeners();
-      // moveScrollToBottom();
 
   }
 
