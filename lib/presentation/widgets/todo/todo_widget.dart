@@ -1,24 +1,21 @@
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class TodoWidget extends StatelessWidget {
-
   final String todo;
   final ValueChanged<String> onDelete;
   final ValueChanged<String> onCompleted;
   final ValueChanged<String> onEdit;
-  bool completed;
+  final bool completed;
 
-
-  TodoWidget({
-    super.key,
-    required this.todo,
-    this.completed = false,
-    required this.onDelete,
-    required this.onCompleted,
-    required this.onEdit
-  });
+  TodoWidget(
+      {super.key,
+      required this.todo,
+      this.completed = false,
+      required this.onDelete,
+      required this.onCompleted,
+      required this.onEdit
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,7 @@ class TodoWidget extends StatelessWidget {
       child: Card(
         elevation: 0.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 10
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -48,15 +42,20 @@ class TodoWidget extends StatelessWidget {
                   todo,
                   style: TextStyle(
                     fontSize: 20.0,
-                    decoration: completed ? TextDecoration.lineThrough : TextDecoration.none,
+                    decoration: completed
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
                   ),
                 ),
               ),
               FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.red
+                ),
                 onPressed: () {
                   onDelete(todo);
-                }, 
-                child: const Icon( Icons.delete ),
+                },
+                child: const Icon(Icons.delete),
               ),
             ],
           ),

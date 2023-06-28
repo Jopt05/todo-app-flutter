@@ -13,10 +13,10 @@ class MessageFieldBox extends StatelessWidget {
     required this.textController
   });
 
+  final FocusNode focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
-
-    final FocusNode focusNode = FocusNode();
 
     final outlineInputBorder = UnderlineInputBorder(
       borderSide: const BorderSide(
