@@ -62,6 +62,11 @@ class _TodoViewState extends State<_TodoView> {
                   });
                 },
                 currentFilter: actualSearch,
+                onPressCancel: () {
+                  setState(() {
+                    actualSearch = "";
+                  });
+                },
               ),
               const SizedBox(
                 height: 50,
