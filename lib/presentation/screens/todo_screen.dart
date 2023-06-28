@@ -71,9 +71,11 @@ class _TodoViewState extends State<_TodoView> {
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'All ToDos',
-                      style: TextStyle(fontSize: 30),
+                    Text(
+                      '${ showCompletedTodos ? 'Checked' : 'All' } ToDos',
+                      style: const TextStyle(
+                        fontSize: 30
+                      ),
                     ),
                     const Spacer(),
                     CustomButton(
