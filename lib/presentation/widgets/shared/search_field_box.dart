@@ -15,6 +15,8 @@ class SearchFieldBox extends StatelessWidget {
 
   final textController = TextEditingController();
 
+  final FocusNode focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     textController.text = currentFilter != "" ? currentFilter : "";
@@ -45,6 +47,9 @@ class SearchFieldBox extends StatelessWidget {
       );
 
     return TextFormField(
+      onTapOutside: (event) {
+        focusNode.unfocus();
+      },
       controller: textController,
       decoration: inputDecoration,
       onFieldSubmitted: (value) {
